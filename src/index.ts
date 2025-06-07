@@ -7,10 +7,13 @@ import createError from "http-errors";
 import fileUpload from "express-fileupload";
 import mongoInit from "./configs/mongo.config";
 import { kafkaInit } from "./configs/kafka.config";
+import cloudinaryInit from "./configs/cloudinary.config";
+import router from "./routes";
 
 dotenv.config({ path: "./.env" });
 mongoInit();
-kafkaInit();
+// kafkaInit();
+cloudinaryInit();
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
@@ -23,6 +26,7 @@ app.use(
     tempFileDir: "/tmp/", // Temp folder to store uploaded files
   })
 );
+app.use("/api/v1", router);
 
 app.use(async (req, res, next) => {
   next(createError.NotFound("Page not found"));
