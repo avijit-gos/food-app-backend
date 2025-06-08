@@ -12,7 +12,7 @@ import router from "./routes";
 
 dotenv.config({ path: "./.env" });
 mongoInit();
-// kafkaInit();
+kafkaInit();
 cloudinaryInit();
 const app = express();
 

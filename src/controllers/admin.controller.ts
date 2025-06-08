@@ -112,7 +112,7 @@ export const loginAdmin = async (
     );
 
     return res.status(201).json({
-      message: "Admin register successfull",
+      message: "Admin login successfull",
       status: 200,
       admin: isExists,
       token,
