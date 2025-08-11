@@ -51,7 +51,7 @@ export const getAllBanners = async (
     const filter =
       req.query.filter !== "all"
         ? { $and: [{ status: req.query.status }] }
-        : { status: { $ne: "delete" } };
+        : { status: { $ne: "Delete" } };
 
     const banners = await Banner.find(filter)
       .skip((page - 1) * limit)
@@ -107,7 +107,7 @@ export const updateBannerStatus = async (
       throw next(createError.BadRequest("No banner ID is present"));
     if (!req.body.status)
       throw next(createError.BadRequest("No banner status provided"));
-    if (BANNER_STATUS.includes(req.body.status))
+    if (!BANNER_STATUS.includes(req.body.status))
       throw next(createError.BadRequest("Invalid banner status"));
 
     const banner = await Banner.findById(req.params.id).select("status");
@@ -120,13 +120,11 @@ export const updateBannerStatus = async (
       { $set: { status: req.body.status } },
       { new: true }
     );
-    return res
-      .status(200)
-      .json({
-        message: "Banner status has been updated",
-        status: 200,
-        banner: updateBanner,
-      });
+    return res.status(200).json({
+      message: "Banner status has been updated",
+      status: 200,
+      banner: updateBanner,
+    });
   } catch (error: any) {
     throw next(
       createError.BadRequest(

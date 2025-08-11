@@ -11,3 +11,5 @@ export const IMAGE_PATH = process.env.IMAGE_PATH as string;
 // Folders
 export const ADMIN_ACCOUNT_PROFILE_FOLDER = "admin_profile"
 export const BANNER_IMAGE = "banner_image"
+export const FOOD_CATEGORY_IMAGE = "food_category_image"
+export const FOOD_IMAGE = "food_image"
